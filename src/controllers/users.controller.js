@@ -1,7 +1,15 @@
 import logger from '#config/logger.js';
-import { getAllUsers, getUserById as getUser, updateUser as updateUserService, deleteUser as deleteUserService } from '#services/users.service.js';
+import {
+  getAllUsers,
+  getUserById as getUser,
+  updateUser as updateUserService,
+  deleteUser as deleteUserService,
+} from '#services/users.service.js';
 import { formatValidationError } from '#utils/format.js';
-import { userIdSchema, updateUserSchema } from '#validations/users.validation.js';
+import {
+  userIdSchema,
+  updateUserSchema,
+} from '#validations/users.validation.js';
 
 export const fetchAllUsers = async (req, res, next) => {
   try {
@@ -28,7 +36,7 @@ export const getUserById = async (req, res, next) => {
     if (!validationResult.success) {
       return res.status(400).json({
         error: 'Validation failed',
-        details: formatValidationError(validationResult.error)
+        details: formatValidationError(validationResult.error),
       });
     }
 
@@ -61,7 +69,7 @@ export const updateUser = async (req, res, next) => {
     if (!idValidationResult.success) {
       return res.status(400).json({
         error: 'Validation failed',
-        details: formatValidationError(idValidationResult.error)
+        details: formatValidationError(idValidationResult.error),
       });
     }
 
@@ -73,7 +81,7 @@ export const updateUser = async (req, res, next) => {
     if (!bodyValidationResult.success) {
       return res.status(400).json({
         error: 'Validation failed',
-        details: formatValidationError(bodyValidationResult.error)
+        details: formatValidationError(bodyValidationResult.error),
       });
     }
 
@@ -81,17 +89,29 @@ export const updateUser = async (req, res, next) => {
 
     // Check authentication
     if (!req.user) {
-      return res.status(401).json({ error: 'Unauthorized', message: 'Authentication required' });
+      return res
+        .status(401)
+        .json({ error: 'Unauthorized', message: 'Authentication required' });
     }
 
     // Users can only update their own information (unless admin)
     if (req.user.id !== id && req.user.role !== 'admin') {
-      return res.status(403).json({ error: 'Forbidden', message: 'You can only update your own information' });
+      return res
+        .status(403)
+        .json({
+          error: 'Forbidden',
+          message: 'You can only update your own information',
+        });
     }
 
     // Only admins can change roles
     if (updates.role && req.user.role !== 'admin') {
-      return res.status(403).json({ error: 'Forbidden', message: 'Only admins can change user roles' });
+      return res
+        .status(403)
+        .json({
+          error: 'Forbidden',
+          message: 'Only admins can change user roles',
+        });
     }
 
     logger.info(`Updating user with id: ${id}`);
@@ -121,7 +141,7 @@ export const deleteUser = async (req, res, next) => {
     if (!validationResult.success) {
       return res.status(400).json({
         error: 'Validation failed',
-        details: formatValidationError(validationResult.error)
+        details: formatValidationError(validationResult.error),
       });
     }
 
@@ -129,12 +149,19 @@ export const deleteUser = async (req, res, next) => {
 
     // Check authentication
     if (!req.user) {
-      return res.status(401).json({ error: 'Unauthorized', message: 'Authentication required' });
+      return res
+        .status(401)
+        .json({ error: 'Unauthorized', message: 'Authentication required' });
     }
 
     // Users can only delete their own account (unless admin)
     if (req.user.id !== id && req.user.role !== 'admin') {
-      return res.status(403).json({ error: 'Forbidden', message: 'You can only delete your own account' });
+      return res
+        .status(403)
+        .json({
+          error: 'Forbidden',
+          message: 'You can only delete your own account',
+        });
     }
 
     logger.info(`Deleting user with id: ${id}`);

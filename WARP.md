@@ -7,6 +7,7 @@ This file provides guidance to WARP (warp.dev) when working with code in this re
 This is a Node.js (ESM) Express API for user authentication and basic user management backed by Neon Postgres via Drizzle ORM. It is designed to run primarily in Docker, with a Neon Local proxy for development and Neon Cloud for production. Security is enforced via Arcjet, and logging uses Winston + Morgan.
 
 Key documentation:
+
 - `QUICKSTART.md` – concise developer setup and common Docker commands.
 - `DOCKER.md` – full Docker + Neon Local/Cloud setup and migration workflow.
 - `DOCKER_SETUP_SUMMARY.md` – high-level architecture and environment summary.
@@ -52,10 +53,12 @@ In Docker-based development, you typically run these **inside the app container*
 ### Docker-based development (Neon Local)
 
 Environment:
+
 - Uses `docker-compose.dev.yml`.
 - Requires `.env.development` copied to `.env` and filled with Neon credentials (`NEON_API_KEY`, `NEON_PROJECT_ID`, etc.) as described in `QUICKSTART.md` / `DOCKER.md`.
 
 Core commands:
+
 - Start (build + up, detached):
   - `docker-compose -f docker-compose.dev.yml up -d --build`
 - Tail logs for all services:
@@ -66,6 +69,7 @@ Core commands:
   - `docker-compose -f docker-compose.dev.yml down -v`
 
 Database/migrations in dev (run inside the `app` service):
+
 - Generate migrations:
   - `docker-compose -f docker-compose.dev.yml exec app npm run db:generate`
 - Apply migrations:
@@ -78,10 +82,12 @@ Database/migrations in dev (run inside the `app` service):
 ### Docker-based production
 
 Environment:
+
 - Uses `docker-compose.prod.yml`.
 - Requires `.env.production` (or `--env-file`) with `DATABASE_URL` pointing to Neon Cloud and other production env vars (see `DOCKER.md`).
 
 Core commands:
+
 - Build and start (detached):
   - `docker-compose -f docker-compose.prod.yml --env-file .env.production up -d --build`
 - Tail app logs:

@@ -5,24 +5,29 @@ This document provides an overview of the Docker and Neon Database setup for the
 ## 📁 Files Created/Modified
 
 ### Docker Files
+
 - **`Dockerfile`** - Multi-stage build for development and production
 - **`docker-compose.dev.yml`** - Development environment with Neon Local
 - **`docker-compose.prod.yml`** - Production environment with Neon Cloud
 - **`.dockerignore`** - Files excluded from Docker builds
 
 ### Environment Files
+
 - **`.env.development`** - Development environment variables (template)
 - **`.env.production`** - Production environment variables (template)
 
 ### Helper Scripts
+
 - **`dev.ps1`** - PowerShell script for managing development environment (Windows)
 
 ### Documentation
+
 - **`DOCKER.md`** - Complete Docker and Neon Database setup guide
 - **`QUICKSTART.md`** - Quick start guide for developers
 - **`DOCKER_SETUP_SUMMARY.md`** - This file
 
 ### Modified Files
+
 - **`src/config/database.js`** - Updated to support both Neon Local and Neon Cloud
 - **`.gitignore`** - Added Neon Local metadata and environment files
 - **`package.json`** - Added production start script
@@ -74,6 +79,7 @@ This document provides an overview of the Docker and Neon Database setup for the
 ## 🔑 Key Features
 
 ### Development Environment
+
 ✅ **Neon Local Proxy** - Creates ephemeral database branches automatically
 ✅ **Hot Reload** - Code changes reflect immediately without rebuild
 ✅ **Isolated Testing** - Each container start = fresh database branch
@@ -82,6 +88,7 @@ This document provides an overview of the Docker and Neon Database setup for the
 ✅ **Health Checks** - Ensures database is ready before app starts
 
 ### Production Environment
+
 ✅ **Direct Neon Cloud Connection** - No proxy overhead
 ✅ **Optimized Build** - Multi-stage Dockerfile for smaller images
 ✅ **Security** - Non-root user, environment-based secrets
@@ -93,6 +100,7 @@ This document provides an overview of the Docker and Neon Database setup for the
 ## 🔄 Workflow Comparison
 
 ### Development Workflow
+
 ```bash
 1. Developer starts: docker-compose -f docker-compose.dev.yml up
    ↓
@@ -108,6 +116,7 @@ This document provides an overview of the Docker and Neon Database setup for the
 ```
 
 ### Production Workflow
+
 ```bash
 1. Set DATABASE_URL environment variable (Neon Cloud URL)
    ↓
@@ -125,21 +134,23 @@ This document provides an overview of the Docker and Neon Database setup for the
 ## 📊 Environment Variables Reference
 
 ### Development (.env.development)
-| Variable | Purpose | Required |
-|----------|---------|----------|
-| `NEON_API_KEY` | Authenticate with Neon API | Yes |
-| `NEON_PROJECT_ID` | Your Neon project | Yes |
-| `PARENT_BRANCH_ID` | Parent branch for ephemeral branches | No |
-| `DELETE_BRANCH` | Delete branch on shutdown | No (default: true) |
-| `DATABASE_URL` | Connection to Neon Local | Auto-set |
+
+| Variable           | Purpose                              | Required           |
+| ------------------ | ------------------------------------ | ------------------ |
+| `NEON_API_KEY`     | Authenticate with Neon API           | Yes                |
+| `NEON_PROJECT_ID`  | Your Neon project                    | Yes                |
+| `PARENT_BRANCH_ID` | Parent branch for ephemeral branches | No                 |
+| `DELETE_BRANCH`    | Delete branch on shutdown            | No (default: true) |
+| `DATABASE_URL`     | Connection to Neon Local             | Auto-set           |
 
 ### Production (.env.production)
-| Variable | Purpose | Required |
-|----------|---------|----------|
-| `DATABASE_URL` | Connection to Neon Cloud | Yes |
-| `NODE_ENV` | Environment mode | Yes |
-| `PORT` | Application port | No (default: 3000) |
-| `LOG_LEVEL` | Logging verbosity | No (default: info) |
+
+| Variable       | Purpose                  | Required           |
+| -------------- | ------------------------ | ------------------ |
+| `DATABASE_URL` | Connection to Neon Cloud | Yes                |
+| `NODE_ENV`     | Environment mode         | Yes                |
+| `PORT`         | Application port         | No (default: 3000) |
+| `LOG_LEVEL`    | Logging verbosity        | No (default: info) |
 
 ---
 
@@ -150,18 +161,22 @@ This document provides an overview of the Docker and Neon Database setup for the
 The application automatically detects the environment and configures the Neon driver accordingly:
 
 **Development Mode** (NODE_ENV=development):
+
 ```javascript
 neonConfig.fetchEndpoint = 'http://neon-local:5432/sql';
 neonConfig.useSecureWebSocket = false;
 neonConfig.poolQueryViaFetch = true;
 ```
+
 → Routes all queries through Neon Local proxy via HTTP
 
 **Production Mode** (NODE_ENV=production):
+
 ```javascript
 // Uses default Neon Cloud configuration
 // WebSocket over HTTPS for serverless connectivity
 ```
+
 → Direct connection to Neon Cloud with optimal performance
 
 ---
@@ -169,12 +184,14 @@ neonConfig.poolQueryViaFetch = true;
 ## 📦 Docker Images
 
 ### Development Image (Target: development)
+
 - Base: `node:20-alpine`
 - Includes: All dependencies, source code mounted as volume
 - Size: ~200-300 MB
 - Features: Hot reload, debugging support
 
 ### Production Image (Target: production)
+
 - Base: `node:20-alpine`
 - Includes: Production dependencies only, optimized build
 - Size: ~150-200 MB
@@ -185,12 +202,14 @@ neonConfig.poolQueryViaFetch = true;
 ## 🔐 Security Considerations
 
 ### Development
+
 - ✅ Credentials in `.env` (not committed)
 - ✅ Self-signed certificates handled automatically
 - ✅ Local network isolation
 - ⚠️ Ephemeral branches contain production data snapshots
 
 ### Production
+
 - ✅ Environment-based secrets (never hardcoded)
 - ✅ Non-root container user
 - ✅ Minimal image size
@@ -198,6 +217,7 @@ neonConfig.poolQueryViaFetch = true;
 - ✅ Health checks for availability monitoring
 
 ### Recommendations
+
 1. Use secrets management (AWS Secrets Manager, Azure Key Vault, etc.)
 2. Rotate Neon API keys regularly
 3. Use separate Neon projects for dev/staging/prod
@@ -209,6 +229,7 @@ neonConfig.poolQueryViaFetch = true;
 ## 🚀 Quick Commands Reference
 
 ### Development
+
 ```bash
 # Start
 docker-compose -f docker-compose.dev.yml up -d --build
@@ -227,6 +248,7 @@ docker-compose -f docker-compose.dev.yml down
 ```
 
 ### Production
+
 ```bash
 # Build
 docker-compose -f docker-compose.prod.yml build
@@ -245,6 +267,7 @@ docker-compose -f docker-compose.prod.yml down
 ```
 
 ### Using PowerShell Helper (Windows)
+
 ```powershell
 .\dev.ps1 start    # Start development
 .\dev.ps1 logs     # View logs
@@ -280,12 +303,14 @@ docker-compose -f docker-compose.prod.yml down
 ## 💡 Tips & Best Practices
 
 ### Development
+
 - Keep `DELETE_BRANCH=true` for clean testing
 - Use `.\dev.ps1 clean` to reset everything
 - Check Neon Local logs if branches aren't created
 - Use Drizzle Studio to inspect database state
 
 ### Production
+
 - Always test migrations in staging first
 - Use environment variables for secrets
 - Monitor logs regularly
@@ -293,6 +318,7 @@ docker-compose -f docker-compose.prod.yml down
 - Use rolling deployments for zero downtime
 
 ### General
+
 - Never commit `.env` files with real credentials
 - Use separate Neon projects per environment
 - Document schema changes in migrations

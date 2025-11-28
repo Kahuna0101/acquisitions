@@ -19,12 +19,14 @@ This guide explains how to run the Acquisitions application using Docker with Ne
 The application supports two deployment modes:
 
 ### Development Mode
+
 - Uses **Neon Local** - a Docker-based proxy that creates ephemeral database branches
 - Each container start creates a fresh database branch
 - Automatic cleanup when container stops
 - Perfect for isolated testing and development
 
 ### Production Mode
+
 - Uses **Neon Cloud** - the actual serverless Postgres database
 - Direct connection to your production Neon project
 - Managed via environment variables
@@ -35,11 +37,13 @@ The application supports two deployment modes:
 ## Prerequisites
 
 ### Required Software
+
 - Docker Desktop (Windows/Mac) or Docker Engine (Linux)
 - Docker Compose v3.8+
 - Git
 
 ### Required Credentials
+
 - **Neon API Key**: Get from [Neon Console → Settings → API Keys](https://console.neon.tech/app/settings/api-keys)
 - **Neon Project ID**: Found in [Neon Console → Project Settings](https://console.neon.tech/app/projects)
 - **Production Database URL**: Your Neon Cloud connection string
@@ -88,10 +92,12 @@ docker-compose -f docker-compose.dev.yml up -d --build
 ### Step 3: Verify Setup
 
 The application will be available at:
+
 - **Application**: http://localhost:3000
 - **Neon Local Proxy**: localhost:5432
 
 Check logs:
+
 ```bash
 docker-compose -f docker-compose.dev.yml logs -f
 ```
@@ -193,25 +199,25 @@ docker-compose -f docker-compose.prod.yml down
 
 ### Development Variables
 
-| Variable | Required | Description | Default |
-|----------|----------|-------------|---------|
-| `NEON_API_KEY` | Yes | Your Neon API key | N/A |
-| `NEON_PROJECT_ID` | Yes | Your Neon project ID | N/A |
-| `PARENT_BRANCH_ID` | No | Parent branch for ephemeral branches | Default branch |
-| `DELETE_BRANCH` | No | Delete branch on container stop | `true` |
-| `PORT` | No | Application port | `3000` |
-| `NODE_ENV` | No | Environment mode | `development` |
-| `LOG_LEVEL` | No | Logging level | `debug` |
-| `DB_NAME` | No | Database name | `neondb` |
+| Variable           | Required | Description                          | Default        |
+| ------------------ | -------- | ------------------------------------ | -------------- |
+| `NEON_API_KEY`     | Yes      | Your Neon API key                    | N/A            |
+| `NEON_PROJECT_ID`  | Yes      | Your Neon project ID                 | N/A            |
+| `PARENT_BRANCH_ID` | No       | Parent branch for ephemeral branches | Default branch |
+| `DELETE_BRANCH`    | No       | Delete branch on container stop      | `true`         |
+| `PORT`             | No       | Application port                     | `3000`         |
+| `NODE_ENV`         | No       | Environment mode                     | `development`  |
+| `LOG_LEVEL`        | No       | Logging level                        | `debug`        |
+| `DB_NAME`          | No       | Database name                        | `neondb`       |
 
 ### Production Variables
 
-| Variable | Required | Description | Default |
-|----------|----------|-------------|---------|
-| `DATABASE_URL` | Yes | Neon Cloud connection string | N/A |
-| `PORT` | No | Application port | `3000` |
-| `NODE_ENV` | No | Environment mode | `production` |
-| `LOG_LEVEL` | No | Logging level | `info` |
+| Variable       | Required | Description                  | Default      |
+| -------------- | -------- | ---------------------------- | ------------ |
+| `DATABASE_URL` | Yes      | Neon Cloud connection string | N/A          |
+| `PORT`         | No       | Application port             | `3000`       |
+| `NODE_ENV`     | No       | Environment mode             | `production` |
+| `LOG_LEVEL`    | No       | Logging level                | `info`       |
 
 ---
 
@@ -254,12 +260,15 @@ docker-compose -f docker-compose.dev.yml logs neon-local
 **Solution**: The application is already configured to handle self-signed certificates in development. If you're connecting via a Postgres client, add:
 
 ```javascript
-ssl: { rejectUnauthorized: false }
+ssl: {
+  rejectUnauthorized: false;
+}
 ```
 
 ### Issue: Branch not being created
 
 **Solutions**:
+
 1. Verify `NEON_API_KEY` and `NEON_PROJECT_ID` are correct
 2. Check Neon Local logs: `docker-compose -f docker-compose.dev.yml logs neon-local`
 3. Ensure your API key has proper permissions
@@ -278,7 +287,7 @@ ssl: { rejectUnauthorized: false }
 # In docker-compose.dev.yml
 neon-local:
   ports:
-    - "5433:5432"  # Use different host port
+    - '5433:5432' # Use different host port
 ```
 
 Then update `DATABASE_URL` to use the new port.
@@ -290,7 +299,7 @@ Then update `DATABASE_URL` to use the new port.
 ```yaml
 volumes:
   - ./src:/app/src
-  - /app/node_modules  # Don't overwrite
+  - /app/node_modules # Don't overwrite
 ```
 
 ---
@@ -376,6 +385,7 @@ docker-compose -f docker-compose.prod.yml down
 ## Support
 
 For issues or questions:
+
 - Check the [Neon Documentation](https://neon.com/docs)
 - Review [GitHub Issues](https://github.com/Kahuna0101/acquisitions/issues)
 - Contact the development team

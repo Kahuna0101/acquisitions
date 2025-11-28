@@ -5,40 +5,46 @@ Get the Acquisitions application running in under 5 minutes!
 ## 🚀 Development Setup (Recommended)
 
 ### Prerequisites
+
 - Docker Desktop installed and running
 - Neon account and API credentials
 
 ### Steps
 
 1. **Clone and navigate to the project**
+
    ```bash
    git clone https://github.com/Kahuna0101/acquisitions.git
    cd acquisitions
    ```
 
 2. **Configure environment**
+
    ```bash
    # Copy development environment template
    cp .env.development .env
-   
+
    # Edit .env and add your Neon credentials:
    # NEON_API_KEY=your_api_key
    # NEON_PROJECT_ID=your_project_id
    ```
 
 3. **Start the application**
-   
+
    **Option A: Using PowerShell helper (Windows)**
+
    ```powershell
    .\dev.ps1 start
    ```
-   
+
    **Option B: Using Docker Compose directly**
+
    ```bash
    docker-compose -f docker-compose.dev.yml up -d --build
    ```
 
 4. **Run database migrations**
+
    ```bash
    docker-compose -f docker-compose.dev.yml exec app npm run db:migrate
    ```
@@ -48,11 +54,13 @@ Get the Acquisitions application running in under 5 minutes!
    - Database: localhost:5432
 
 ### View Logs
+
 ```bash
 docker-compose -f docker-compose.dev.yml logs -f
 ```
 
 ### Stop the application
+
 ```bash
 docker-compose -f docker-compose.dev.yml down
 ```
@@ -64,14 +72,16 @@ docker-compose -f docker-compose.dev.yml down
 ### Steps
 
 1. **Configure production environment**
+
    ```bash
    cp .env.production .env
-   
+
    # Edit .env and add your Neon Cloud connection string:
    # DATABASE_URL=postgres://...neon.tech/neondb
    ```
 
 2. **Build and start**
+
    ```bash
    docker-compose -f docker-compose.prod.yml --env-file .env.production up -d --build
    ```
@@ -86,6 +96,7 @@ docker-compose -f docker-compose.dev.yml down
 ## 🛠️ Common Commands
 
 ### Development
+
 ```bash
 # Start development environment
 .\dev.ps1 start                          # PowerShell
@@ -113,6 +124,7 @@ docker-compose -f docker-compose.dev.yml down -v  # Direct
 ```
 
 ### Production
+
 ```bash
 # Start production environment
 docker-compose -f docker-compose.prod.yml --env-file .env.production up -d
@@ -152,19 +164,23 @@ docker-compose -f docker-compose.prod.yml down
 ## ❓ Troubleshooting
 
 ### Port already in use
+
 If port 3000 or 5432 is already in use, edit `.env` and change:
+
 ```env
 PORT=3001  # Change application port
 ```
 
 For database port conflicts, edit `docker-compose.dev.yml`:
+
 ```yaml
 neon-local:
   ports:
-    - "5433:5432"  # Change host port
+    - '5433:5432' # Change host port
 ```
 
 ### Container won't start
+
 ```bash
 # Check logs
 docker-compose -f docker-compose.dev.yml logs
@@ -175,6 +191,7 @@ docker-compose -f docker-compose.dev.yml up -d --build
 ```
 
 ### Database connection issues
+
 1. Verify your Neon credentials in `.env`
 2. Check Neon Local container logs:
    ```bash
