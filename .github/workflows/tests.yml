@@ -1,0 +1,81 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - main
+      - staging
+  pull_request:
+    branches:
+      - main
+      - staging
+
+jobs:
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+
+    env:
+      NODE_ENV: test
+      NODE_OPTIONS: --experimental-vm-modules
+      DATABASE_URL: ${{ secrets.DATABASE_URL || 'postgresql://test:test@localhost:5432/test_db' }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        id: test
+        run: npm test
+        continue-on-error: true
+
+      - name: Upload coverage reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage/
+          retention-days: 30
+
+      - name: Generate step summary
+        if: always()
+        run: |
+          echo "## Test Results 🧪" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "${{ steps.test.outcome }}" == "success" ]; then
+            echo "✅ **All tests passed!**" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "### Coverage Report" >> $GITHUB_STEP_SUMMARY
+            if [ -f coverage/coverage-summary.json ]; then
+              echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+              cat coverage/coverage-summary.json >> $GITHUB_STEP_SUMMARY
+              echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+            else
+              echo "Coverage artifacts uploaded. Download to view detailed coverage." >> $GITHUB_STEP_SUMMARY
+            fi
+          else
+            echo "❌ **Tests failed!**" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "Please check the test output above for details." >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Annotate test failures
+        if: steps.test.outcome == 'failure'
+        run: |
+          echo "::error::Test suite failed! Please review the test output for details."
+          echo "::error::Run 'npm test' locally to reproduce the failures."
+          exit 1
+
+      - name: Success message
+        if: steps.test.outcome == 'success'
+        run: echo "✅ All tests passed successfully!"

@@ -343,3 +343,78 @@
 {"level":"info","message":"::1 - - [27/Nov/2025:15:50:53 +0000] \"GET /health HTTP/1.1\" 200 79 \"-\" \"-\"","service":"acquistions-api"}
 {"ip":"::ffff:172.19.0.1","level":"warn","message":"Rate limit exceeded","path":"/api/users/2","service":"acquistions-api","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"}
 {"level":"info","message":"::ffff:172.19.0.1 - - [27/Nov/2025:15:50:57 +0000] \"GET /api/users/2 HTTP/1.1\" 403 51 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36\"","service":"acquistions-api"}
+{"level":"info","message":"::ffff:172.19.0.1 - - [27/Nov/2025:15:54:47 +0000] \"GET /api/users/2 HTTP/1.1\" 401 60 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36\"","service":"acquistions-api"}
+{"level":"info","message":"::1 - - [27/Nov/2025:15:54:47 +0000] \"GET /health HTTP/1.1\" 200 77 \"-\" \"-\"","service":"acquistions-api"}
+{"level":"info","message":"::ffff:172.19.0.1 - - [27/Nov/2025:15:55:08 +0000] \"GET /api/users/2 HTTP/1.1\" 401 60 \"-\" \"HTTPie\"","service":"acquistions-api"}
+{"level":"info","message":"::1 - - [27/Nov/2025:15:55:18 +0000] \"GET /health HTTP/1.1\" 200 77 \"-\" \"-\"","service":"acquistions-api"}
+{"level":"info","message":"::ffff:172.19.0.1 - - [27/Nov/2025:15:55:46 +0000] \"GET /api/auth/sign-in HTTP/1.1\" 404 155 \"-\" \"HTTPie\"","service":"acquistions-api"}
+{"level":"info","message":"::1 - - [27/Nov/2025:15:55:48 +0000] \"GET /health HTTP/1.1\" 200 77 \"-\" \"-\"","service":"acquistions-api"}
+{"level":"error","message":"Error authenticating user: Error: User not found","service":"acquistions-api"}
+{"level":"error","message":"Signin error User not found","service":"acquistions-api","stack":"Error: User not found\n    at authenticateUser (file:///app/src/services/auth.service.js:51:13)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async signin (file:///app/src/controllers/auth.controller.js:61:18)"}
+{"level":"info","message":"::ffff:172.19.0.1 - - [27/Nov/2025:15:56:01 +0000] \"POST /api/auth/sign-in HTTP/1.1\" 401 31 \"-\" \"HTTPie\"","service":"acquistions-api"}
+{"level":"info","message":"::1 - - [27/Nov/2025:15:56:18 +0000] \"GET /health HTTP/1.1\" 200 78 \"-\" \"-\"","service":"acquistions-api"}
+{"level":"info","message":"::ffff:172.19.0.1 - - [27/Nov/2025:15:56:31 +0000] \"GET /api/users/ HTTP/1.1\" 401 60 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36\"","service":"acquistions-api"}
+{"level":"info","message":"::1 - - [27/Nov/2025:15:56:49 +0000] \"GET /health HTTP/1.1\" 200 78 \"-\" \"-\"","service":"acquistions-api"}
+{"level":"info","message":"::1 - - [27/Nov/2025:15:57:19 +0000] \"GET /health HTTP/1.1\" 200 78 \"-\" \"-\"","service":"acquistions-api"}
+{"level":"info","message":"::ffff:172.19.0.1 - - [27/Nov/2025:15:57:33 +0000] \"GET /api/users HTTP/1.1\" 401 60 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36\"","service":"acquistions-api"}
+{"level":"info","message":"::1 - - [27/Nov/2025:15:57:50 +0000] \"GET /health HTTP/1.1\" 200 78 \"-\" \"-\"","service":"acquistions-api"}
+{"level":"info","message":"User admin@kahuna.com authenticated successfully","service":"acquistions-api"}
+{"level":"info","message":"User signed in successfully: admin@kahuna.com","service":"acquistions-api"}
+{"level":"info","message":"::ffff:172.19.0.1 - - [27/Nov/2025:15:58:14 +0000] \"POST /api/auth/sign-in HTTP/1.1\" 200 101 \"-\" \"HTTPie\"","service":"acquistions-api"}
+{"level":"info","message":"::1 - - [27/Nov/2025:15:58:20 +0000] \"GET /health HTTP/1.1\" 200 78 \"-\" \"-\"","service":"acquistions-api"}
+{"level":"info","message":"::1 - - [27/Nov/2025:15:58:51 +0000] \"GET /health HTTP/1.1\" 200 78 \"-\" \"-\"","service":"acquistions-api"}
+{"level":"info","message":"::1 - - [27/Nov/2025:15:59:21 +0000] \"GET /health HTTP/1.1\" 200 78 \"-\" \"-\"","service":"acquistions-api"}
+{"level":"info","message":"Getting user with id: 2","service":"acquistions-api"}
+{"level":"info","message":"::ffff:172.19.0.1 - - [27/Nov/2025:15:59:43 +0000] \"GET /api/users/2 HTTP/1.1\" 200 203 \"-\" \"HTTPie\"","service":"acquistions-api"}
+{"level":"info","message":"::1 - - [27/Nov/2025:15:59:51 +0000] \"GET /health HTTP/1.1\" 200 78 \"-\" \"-\"","service":"acquistions-api"}
+{"level":"info","message":"Getting user with id: 3","service":"acquistions-api"}
+{"level":"error","message":"Error getting user by id: 3 User not found","service":"acquistions-api","stack":"Error: User not found\n    at getUserById (file:///app/src/services/users.service.js:34:13)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async getUserById (file:///app/src/controllers/users.controller.js:39:18)"}
+{"level":"error","message":"Error getting user by id User not found","service":"acquistions-api","stack":"Error: User not found\n    at getUserById (file:///app/src/services/users.service.js:34:13)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async getUserById (file:///app/src/controllers/users.controller.js:39:18)"}
+{"level":"info","message":"::ffff:172.19.0.1 - - [27/Nov/2025:16:00:03 +0000] \"GET /api/users/3 HTTP/1.1\" 404 26 \"-\" \"HTTPie\"","service":"acquistions-api"}
+{"level":"info","message":"Getting user with id: 1","service":"acquistions-api"}
+{"level":"info","message":"::ffff:172.19.0.1 - - [27/Nov/2025:16:00:07 +0000] \"GET /api/users/1 HTTP/1.1\" 200 194 \"-\" \"HTTPie\"","service":"acquistions-api"}
+{"level":"info","message":"::1 - - [27/Nov/2025:16:00:22 +0000] \"GET /health HTTP/1.1\" 200 78 \"-\" \"-\"","service":"acquistions-api"}
+{"level":"info","message":"::1 - - [27/Nov/2025:16:00:52 +0000] \"GET /health HTTP/1.1\" 200 78 \"-\" \"-\"","service":"acquistions-api"}
+{"level":"info","message":"User signed out successfully","service":"acquistions-api"}
+{"level":"info","message":"::ffff:172.19.0.1 - - [27/Nov/2025:16:01:13 +0000] \"POST /api/auth/sign-out HTTP/1.1\" 200 42 \"-\" \"HTTPie\"","service":"acquistions-api"}
+{"level":"info","message":"::1 - - [27/Nov/2025:16:01:22 +0000] \"GET /health HTTP/1.1\" 200 78 \"-\" \"-\"","service":"acquistions-api"}
+{"level":"info","message":"User dawodubolaji189@gmail.com authenticated successfully","service":"acquistions-api"}
+{"level":"info","message":"User signed in successfully: dawodubolaji189@gmail.com","service":"acquistions-api"}
+{"level":"info","message":"::ffff:172.19.0.1 - - [27/Nov/2025:16:01:47 +0000] \"POST /api/auth/sign-in HTTP/1.1\" 200 110 \"-\" \"HTTPie\"","service":"acquistions-api"}
+{"level":"info","message":"::1 - - [27/Nov/2025:16:01:53 +0000] \"GET /health HTTP/1.1\" 200 77 \"-\" \"-\"","service":"acquistions-api"}
+{"level":"info","message":"::1 - - [27/Nov/2025:16:02:23 +0000] \"GET /health HTTP/1.1\" 200 78 \"-\" \"-\"","service":"acquistions-api"}
+{"level":"info","message":"::1 - - [27/Nov/2025:16:02:54 +0000] \"GET /health HTTP/1.1\" 200 78 \"-\" \"-\"","service":"acquistions-api"}
+{"level":"info","message":"Getting user with id: 2","service":"acquistions-api"}
+{"level":"info","message":"::ffff:172.19.0.1 - - [27/Nov/2025:16:02:56 +0000] \"GET /api/users/2 HTTP/1.1\" 200 203 \"-\" \"HTTPie\"","service":"acquistions-api"}
+{"level":"info","message":"Getting user with id: 1","service":"acquistions-api"}
+{"level":"info","message":"::ffff:172.19.0.1 - - [27/Nov/2025:16:03:01 +0000] \"GET /api/users/1 HTTP/1.1\" 200 194 \"-\" \"HTTPie\"","service":"acquistions-api"}
+{"level":"info","message":"::ffff:172.19.0.1 - - [27/Nov/2025:16:03:21 +0000] \"DELETE /api/users/1 HTTP/1.1\" 403 70 \"-\" \"HTTPie\"","service":"acquistions-api"}
+{"level":"info","message":"::1 - - [27/Nov/2025:16:03:24 +0000] \"GET /health HTTP/1.1\" 200 78 \"-\" \"-\"","service":"acquistions-api"}
+{"level":"info","message":"::1 - - [27/Nov/2025:16:03:54 +0000] \"GET /health HTTP/1.1\" 200 78 \"-\" \"-\"","service":"acquistions-api"}
+{"level":"info","message":"::1 - - [27/Nov/2025:16:04:25 +0000] \"GET /health HTTP/1.1\" 200 78 \"-\" \"-\"","service":"acquistions-api"}
+{"level":"info","message":"Getting users ...","service":"acquistions-api"}
+{"level":"info","message":"::ffff:172.19.0.1 - - [27/Nov/2025:16:04:50 +0000] \"GET /api/users HTTP/1.1\" 200 363 \"-\" \"HTTPie\"","service":"acquistions-api"}
+{"level":"info","message":"::1 - - [27/Nov/2025:16:04:55 +0000] \"GET /health HTTP/1.1\" 200 78 \"-\" \"-\"","service":"acquistions-api"}
+{"level":"info","message":"::1 - - [27/Nov/2025:16:05:25 +0000] \"GET /health HTTP/1.1\" 200 78 \"-\" \"-\"","service":"acquistions-api"}
+{"level":"info","message":"::1 - - [27/Nov/2025:16:05:56 +0000] \"GET /health HTTP/1.1\" 200 78 \"-\" \"-\"","service":"acquistions-api"}
+{"level":"info","message":"User dawodubolaji@gmail.com created successfully","service":"acquistions-api"}
+{"level":"info","message":"User registered successfully: dawodubolaji@gmail.com","service":"acquistions-api"}
+{"level":"info","message":"::ffff:172.19.0.1 - - [27/Nov/2025:16:06:23 +0000] \"POST /api/auth/sign-up HTTP/1.1\" 201 116 \"-\" \"HTTPie\"","service":"acquistions-api"}
+{"level":"info","message":"::1 - - [27/Nov/2025:16:06:26 +0000] \"GET /health HTTP/1.1\" 200 78 \"-\" \"-\"","service":"acquistions-api"}
+{"level":"info","message":"::1 - - [27/Nov/2025:16:06:56 +0000] \"GET /health HTTP/1.1\" 200 78 \"-\" \"-\"","service":"acquistions-api"}
+{"level":"info","message":"Deleting user with id: 1","service":"acquistions-api"}
+{"level":"info","message":"User 1 deleted successfully","service":"acquistions-api"}
+{"level":"info","message":"::ffff:172.19.0.1 - - [27/Nov/2025:16:07:10 +0000] \"DELETE /api/users/1 HTTP/1.1\" 200 39 \"-\" \"HTTPie\"","service":"acquistions-api"}
+{"level":"info","message":"::1 - - [27/Nov/2025:16:07:27 +0000] \"GET /health HTTP/1.1\" 200 78 \"-\" \"-\"","service":"acquistions-api"}
+{"level":"info","message":"::1 - - [27/Nov/2025:16:07:57 +0000] \"GET /health HTTP/1.1\" 200 78 \"-\" \"-\"","service":"acquistions-api"}
+{"level":"info","message":"::1 - - [27/Nov/2025:16:08:27 +0000] \"GET /health HTTP/1.1\" 200 78 \"-\" \"-\"","service":"acquistions-api"}
+{"level":"info","message":"::1 - - [27/Nov/2025:16:08:58 +0000] \"GET /health HTTP/1.1\" 200 78 \"-\" \"-\"","service":"acquistions-api"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [28/Nov/2025:08:39:41 +0000] \"GET /health HTTP/1.1\" 200 74 \"-\" \"-\"","service":"acquistions-api"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [28/Nov/2025:08:39:41 +0000] \"GET /api HTTP/1.1\" 200 42 \"-\" \"-\"","service":"acquistions-api"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [28/Nov/2025:08:39:41 +0000] \"GET /nonexistent HTTP/1.1\" 404 27 \"-\" \"-\"","service":"acquistions-api"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [28/Nov/2025:08:46:00 +0000] \"GET /health HTTP/1.1\" 200 74 \"-\" \"-\"","service":"acquistions-api"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [28/Nov/2025:08:46:00 +0000] \"GET /api HTTP/1.1\" 200 42 \"-\" \"-\"","service":"acquistions-api"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [28/Nov/2025:08:46:00 +0000] \"GET /nonexistent HTTP/1.1\" 404 27 \"-\" \"-\"","service":"acquistions-api"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [28/Nov/2025:08:48:22 +0000] \"GET /health HTTP/1.1\" 200 73 \"-\" \"-\"","service":"acquistions-api"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [28/Nov/2025:08:48:22 +0000] \"GET /api HTTP/1.1\" 200 42 \"-\" \"-\"","service":"acquistions-api"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [28/Nov/2025:08:48:22 +0000] \"GET /nonexistent HTTP/1.1\" 404 27 \"-\" \"-\"","service":"acquistions-api"}
